@@ -1,0 +1,9 @@
+main(machine, includedMachine, simulation) ::= <<
+public static void main(String[] args) {
+    <simulation; separator="\n">
+}
+>>
+
+operation(machine, operation, params, empty) ::= <<
+<machine>.<operation>(<params; separator=", ">);
+>>

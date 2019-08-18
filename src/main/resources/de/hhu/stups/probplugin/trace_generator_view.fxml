@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
+<?import java.lang.String?>
+<fx:root type="Stage" title="Trace Generator" width="1200.0" height="800.0"
+         minWidth="600" minHeight="400"
+         xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene stylesheets="@/prob.css">
+            <SplitPane fx:id="parent" dividerPositions="0.5" orientation="HORIZONTAL">
+                <AnchorPane>
+                    <children>
+                        <VBox alignment="center">
+                            <HBox>
+                                <Label text="Language"/>
+                                <ChoiceBox fx:id="languageChoice">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Java"/>
+                                            <String fx:value="C++"/>
+                                            <String fx:value="B"/>
+                                        </FXCollections>
+                                    </items>
+                                </ChoiceBox>
+                            </HBox>
+                            <HBox fx:id="machineBox" spacing="10.0">
+                                <Label text="Machine Name"/>
+                                <TextField fx:id="tfMachine" text=""/>
+                            </HBox>
+                            <HBox spacing="10.0">
+                                <Label text="Included Machine Name"/>
+                                <TextField fx:id="tfIncludedMachine" text=""/>
+                            </HBox>
+                            <Button fx:id="btGenerate" text="Generate" onAction="#generate" styleClass="button-blue" />
+                        </VBox>
+                    </children>
+                </AnchorPane>
+                <TextArea editable="false" fx:id="taGeneration"/>
+            </SplitPane>
+        </Scene>
+    </scene>
+</fx:root>

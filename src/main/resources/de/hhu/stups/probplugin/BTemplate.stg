@@ -1,0 +1,20 @@
+main(machine, includedMachine, simulation) ::= <<
+
+MACHINE <machine>
+
+INCLUDES <includedMachine>
+
+INITIALISATION
+
+OPERATIONS
+	simulate =
+	      BEGIN
+            <simulation; separator=";\n">
+	      END
+
+END
+>>
+
+operation(machine, operation, params, empty) ::= <<
+<if(empty)><operation><else><operation>(<params; separator=", ">)<endif>
+>>

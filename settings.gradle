@@ -1,0 +1,2 @@
+rootProject.name = 'Trace-Code-Generation-Plugin'
+include ':prob2-ui'

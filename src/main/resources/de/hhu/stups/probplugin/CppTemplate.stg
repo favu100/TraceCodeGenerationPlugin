@@ -1,0 +1,10 @@
+main(machine, includedMachine, simulation) ::= <<
+int main() {
+    <simulation; separator="\n">
+    return 0;
+}
+>>
+
+operation(machine, operation, params, empty) ::= <<
+<machine>.<operation>(<params; separator= ", ">);
+>>
