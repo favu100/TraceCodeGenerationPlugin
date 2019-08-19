@@ -38,9 +38,13 @@
                                 <Label text="Machine Name"/>
                                 <TextField fx:id="tfMachine" text=""/>
                             </HBox>
+                            <HBox fx:id="includedMachineClassBox" spacing="10.0">
+                                <Label text="Included Machine Class"/>
+                                <TextField fx:id="tfIncludedMachineClazz" text=""/>
+                            </HBox>
                             <HBox spacing="10.0">
                                 <Label text="Included Machine Name"/>
-                                <TextField fx:id="tfIncludedMachine" text=""/>
+                                <TextField fx:id="tfIncludedMachineName" text=""/>
                             </HBox>
                             <Button fx:id="btGenerate" text="Generate" onAction="#generate" styleClass="button-blue" />
                         </VBox>

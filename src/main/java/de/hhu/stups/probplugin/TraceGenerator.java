@@ -15,27 +15,35 @@ import java.util.stream.Collectors;
 @Singleton
 public class TraceGenerator {
 
-    public String generateAllOperations(String machine, String includedMachine, STGroup group, List<Transition> transitions) {
+    public String generateAllOperations(String machine, String clazz, String includedMachine, STGroup group, List<Transition> transitions) {
         ST template = group.getInstanceOf("main");
         List<String> statements = transitions.stream()
                 .map(t -> generateOperation(includedMachine, t.getName(), t.getParameterValues(), group))
                 .collect(Collectors.toList());
-        template.add("machine", machine);
-        template.add("includedMachine", includedMachine);
-        template.add("simulation", statements);
+        TemplateHandler.add(template, "machine", machine);
+        TemplateHandler.add(template, "includedMachine", includedMachine);
+        TemplateHandler.add(template,"initialization", generateInitialization(group, clazz, includedMachine));
+        TemplateHandler.add(template,"simulation", statements);
+        return template.render();
+    }
+
+    private String generateInitialization(STGroup group, String clazz, String machine) {
+        ST template = group.getInstanceOf("initialization");
+        TemplateHandler.add(template,"class", clazz);
+        TemplateHandler.add(template,"machine", machine);
         return template.render();
     }
 
     private String generateOperation(String includedMachine, String operation, List<String> params, STGroup group) {
         ST template = group.getInstanceOf("operation");
-        template.add("machine", includedMachine);
+        TemplateHandler.add(template,"machine", includedMachine);
         if(!"$initialise_machine".equals(operation)) {
-            template.add("operation", operation);
+            TemplateHandler.add(template,"operation", operation);
         } else {
             return "";
         }
-        template.add("empty", params.isEmpty());
-        template.add("params", params);
+        TemplateHandler.add(template,"empty", params.isEmpty());
+        TemplateHandler.add(template,"params", params);
         return template.render();
     }
 }

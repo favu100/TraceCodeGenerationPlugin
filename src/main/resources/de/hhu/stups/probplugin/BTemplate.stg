@@ -15,6 +15,9 @@ OPERATIONS
 END
 >>
 
-operation(machine, operation, params, empty) ::= <<
+initialization() ::= <<
+>>
+
+operation(operation, params, empty) ::= <<
 <if(empty)><operation><else><operation>(<params; separator=", ">)<endif>
 >>

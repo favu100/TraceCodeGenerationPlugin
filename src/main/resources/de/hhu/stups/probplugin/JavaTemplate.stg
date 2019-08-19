@@ -1,9 +1,14 @@
-main(machine, includedMachine, simulation) ::= <<
+main(initialization, simulation) ::= <<
 public static void main(String[] args) {
+    <initialization>
     <simulation; separator="\n">
 }
 >>
 
-operation(machine, operation, params, empty) ::= <<
+initialization(class, machine) ::= <<
+<class> <machine> = new <class>();
+>>
+
+operation(machine, operation, params) ::= <<
 <machine>.<operation>(<params; separator=", ">);
 >>

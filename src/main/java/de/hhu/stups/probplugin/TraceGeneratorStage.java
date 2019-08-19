@@ -27,10 +27,16 @@ public class TraceGeneratorStage extends Stage {
     private HBox machineBox;
 
     @FXML
+    private HBox includedMachineClassBox;
+
+    @FXML
     private TextField tfMachine;
 
     @FXML
-    private TextField tfIncludedMachine;
+    private TextField tfIncludedMachineClazz;
+
+    @FXML
+    private TextField tfIncludedMachineName;
 
     @FXML
     private Button btGenerate;
@@ -57,8 +63,10 @@ public class TraceGeneratorStage extends Stage {
         languageChoice.valueProperty().addListener((observable, from, to) -> {
             if("B".equals(to)) {
                 machineBox.setVisible(true);
+                includedMachineClassBox.setVisible(false);
             } else {
                 machineBox.setVisible(false);
+                includedMachineClassBox.setVisible(true);
             }
         });
     }
@@ -67,10 +75,10 @@ public class TraceGeneratorStage extends Stage {
     private void generate() {
         Trace trace = currentTrace.get();
         String language = languageChoice.getValue();
-        if(("B".equals(language) && tfMachine.getText().isEmpty()) || tfIncludedMachine.getText().isEmpty() || language == null || language.isEmpty()) {
+        if(("B".equals(language) && tfMachine.getText().isEmpty()) || tfIncludedMachineName.getText().isEmpty() || (!"B".equals(language) && tfIncludedMachineClazz.getText().isEmpty()) || language == null || language.isEmpty()) {
             return;
         }
-        String result = traceGenerator.generateAllOperations(tfMachine.getText(), tfIncludedMachine.getText(), Utils.getGroup(language), trace.getTransitionList());
+        String result = traceGenerator.generateAllOperations(tfMachine.getText(), tfIncludedMachineClazz.getText(), tfIncludedMachineName.getText(), Utils.getGroup(language), trace.getTransitionList());
         taGeneration.setText(result);
         currentTrace.set(trace);
     }

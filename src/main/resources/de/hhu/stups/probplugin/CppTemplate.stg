@@ -1,10 +1,15 @@
-main(machine, includedMachine, simulation) ::= <<
+main(initialization, simulation) ::= <<
 int main() {
+    <initialization>
     <simulation; separator="\n">
     return 0;
 }
 >>
 
-operation(machine, operation, params, empty) ::= <<
+initialization(class, machine) ::= <<
+<class> <machine> = <class>();
+>>
+
+operation(machine, operation, params) ::= <<
 <machine>.<operation>(<params; separator= ", ">);
 >>
